@@ -17,3 +17,12 @@ class CapuletEngine(Engine):
 
     def needs_service(self):
         return (self.currentMilage - self.lastServiceMilage)>30000
+
+class WilloughbyEngine(Engine):
+    def __init__(self, lastServiceMilage, currentMilage):
+        Engine.__init__(self)
+        self.lastServiceMilage = lastServiceMilage
+        self.currentMilage = currentMilage
+
+    def needs_service(self):
+        return (self.currentMilage - self.lastServiceMilage)>60000
