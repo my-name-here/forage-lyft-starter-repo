@@ -2,7 +2,7 @@
 from car import Car
 from engine import *
 from battery import *
-class carFactory:
+class CarFactory:
     def __init__(self):
         self.engine = None
         self.battery = None
