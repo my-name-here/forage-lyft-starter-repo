@@ -18,3 +18,12 @@ class SpindlerBattery(Battery):
     def needs_service(self):
         return (self.currentDate.year - self.lastServiceDate.year)>=2
 
+
+class NubbinBattery(Battery):
+    def __init__(self, lastServiceDate, currentDate):
+        Battery.__init__(self)
+        self.lastServiceDate = lastServiceDate
+        self.currentDate = currentDate
+
+    def needs_service(self):
+        return (self.currentDate.year - self.lastServiceDate.year)>=4
