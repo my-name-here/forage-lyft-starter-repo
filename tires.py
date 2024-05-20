@@ -1,3 +1,5 @@
+from abc import ABC, abstractmethod
+
 class Tires(ABC):
     def __init__(self, wearArray):
         self.wearArray = wearArray
