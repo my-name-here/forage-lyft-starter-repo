@@ -3,6 +3,7 @@ from datetime import datetime
 
 import engine
 import battery
+import tires
 
 
 class TestEngines(unittest.TestCase):
@@ -68,6 +69,31 @@ class TestBattery(unittest.TestCase):
         NewBattery = battery.NubbinBattery(lastServiced, currentDate)
         self.assertFalse(NewBattery.needs_service())
 
+class TestTires(unittest.TestCase):
+
+    def test_CarriganTires_needsService(self):
+        currentDate = datetime.today().date()
+        lastServiced = currentDate.replace(year= currentDate.year - 3)
+        NewTires = battery.SpindlerBattery(lastServiced, currentDate)
+        self.assertTrue(NewTires.needs_service())
+
+    def test_CarriganTires_DoesNotNeedService(self):
+        currentDate = datetime.today().date()
+        lastServiced = currentDate.replace(year= currentDate.year - 2)
+        NewTires = battery.SpindlerBattery(lastServiced, currentDate)
+        self.assertFalse(NewTires.needs_service())
+
+    def test_OctoprimeTires_needsService(self):
+        currentDate = datetime.today().date()
+        lastServiced = currentDate.replace(year= currentDate.year - 4)
+        NewTires = battery.NubbinBattery(lastServiced, currentDate)
+        self.assertTrue(NewTires.needs_service())
+
+    def test_OctoprimeTires_DoesNotNeedService(self):
+        currentDate = datetime.today().date()
+        lastServiced = currentDate.replace(year= currentDate.year - 3)
+        NewTires = battery.NubbinBattery(lastServiced, currentDate)
+        self.assertFalse(NewTires.needs_service())
 
 if __name__ == '__main__':
     unittest.main()
