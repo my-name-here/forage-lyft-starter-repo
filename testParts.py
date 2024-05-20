@@ -33,7 +33,7 @@ class TestEngines(unittest.TestCase):
 
     def test_SternmanEngine_needsService(self):
         warningLightOn = True
-        Newengine = engine.SternmanEngine(lastServiceMilage, currentMilage)
+        Newengine = engine.SternmanEngine(warningLightOn)
         self.assertTrue(Newengine.needs_service())
 
     def test_SternmanEngine_DoesNotNeedService(self):
