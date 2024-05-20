@@ -2,6 +2,7 @@ import unittest
 from datetime import datetime
 
 import engine
+import battery
 
 
 class TestEngines(unittest.TestCase):
@@ -16,7 +17,7 @@ class TestEngines(unittest.TestCase):
         lastServiceMilage = 0
         currentMilage = 30000
         Newengine = engine.CapuletEngine(lastServiceMilage, currentMilage)
-        self.assertTrue(Newengine.needs_service())
+        self.assertFalse(Newengine.needs_service())
 
     def test_WilloughbyEngine_needsService(self):
         lastServiceMilage = 0
@@ -28,7 +29,7 @@ class TestEngines(unittest.TestCase):
         lastServiceMilage = 0
         currentMilage = 60000
         Newengine = engine.WilloughbyEngine(lastServiceMilage, currentMilage)
-        self.assertTrue(Newengine.needs_service())
+        self.assertFalse(Newengine.needs_service())
 
     def test_SternmanEngine_needsService(self):
         warningLightOn = True
@@ -39,8 +40,33 @@ class TestEngines(unittest.TestCase):
         warningLightOn = False
 
         Newengine = engine.SternmanEngine(warningLightOn)
+        self.assertFalse(Newengine.needs_service())
+
+class TestBattery(unittest.TestCase):
+
+    def test_SpindlerBattery_needsService(self):
+        currentDate = datetime.today().date()
+        lastServiced = currentDate.replace(year= currentDate.year - 2)
+        NewBattery = battery.SpindlerBattery(lastServiced, currentDate)
+        self.assertTrue(NewBattery.needs_service())
+
+    def test_SpindlerBattery_DoesNotNeedService(self):
+        currentDate = datetime.today().date()
+        lastServiced = currentDate.replace(year= currentDate.year - 1)
+        NewBattery = battery.SpindlerBattery(lastServiced, currentDate)
+        self.assertFalse(NewBattery.needs_service())
+
+    def test_NubbinBattery_needsService(self):
+        lastServiceMilage = 0
+        currentMilage = 60001
+        Newengine = engine.WilloughbyEngine(lastServiceMilage, currentMilage)
         self.assertTrue(Newengine.needs_service())
 
+    def test_NubbinBattery_DoesNotNeedService(self):
+        lastServiceMilage = 0
+        currentMilage = 60000
+        Newengine = engine.WilloughbyEngine(lastServiceMilage, currentMilage)
+        self.assertFalse(Newengine.needs_service())
 
 
 if __name__ == '__main__':
