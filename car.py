@@ -11,7 +11,7 @@ class Car(Servicable, ABC):
             self.tire = tires.CarriganTires(wearArray)
         elif tireType == "Octoprime":
             self.tire = tires.OctoprimeTires(wearArray)
-        else:
+        else:#fallback to generic tire, shouldn't be here ever
             self.tire = tires.Tires(wearArray)
 
 
