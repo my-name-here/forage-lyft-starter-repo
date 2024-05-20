@@ -7,7 +7,13 @@ class Car(Servicable, ABC):
         self.battery = battery
         self.engine = engine
         self.wearArray = wearArray
-        self.tire = tires.CarriganTires(wearArray) if tireType == "Carrigan" else tires.OctoprimeTires(wearArray)
+        if tireType == "Carrigan":
+            self.tire = tires.CarriganTires(wearArray)
+        elif tireType == "Octoprime":
+            self.tire = tires.OctoprimeTires(wearArray)
+        else:
+            self.tire = tires.Tires(wearArray)
+
 
     @abstractmethod
     def needs_service(self):
