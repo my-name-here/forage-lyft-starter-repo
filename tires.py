@@ -12,3 +12,11 @@ class CarriganTires(Tires):
     def needs_service(self):
         TireNeedsService = [tireWear>=0.9 for tireWear in self.wearArray]
         return True in TireNeedsService
+
+
+class OctoprimeTires(Tires):
+    def __init__(self, wearArray):
+        super.__init__(self, wearArray)
+    def needs_service(self):
+
+        return sum(self.wearArray)>=3
