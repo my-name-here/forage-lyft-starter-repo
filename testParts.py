@@ -72,27 +72,23 @@ class TestBattery(unittest.TestCase):
 class TestTires(unittest.TestCase):
 
     def test_CarriganTires_needsService(self):
-        currentDate = datetime.today().date()
-        lastServiced = currentDate.replace(year= currentDate.year - 3)
-        NewTires = battery.SpindlerBattery(lastServiced, currentDate)
+        wearArray = [0.1, 0.5, 0.9, 0.1]
+        NewTires = tires.CarriganTires(wearArray)
         self.assertTrue(NewTires.needs_service())
 
     def test_CarriganTires_DoesNotNeedService(self):
-        currentDate = datetime.today().date()
-        lastServiced = currentDate.replace(year= currentDate.year - 2)
-        NewTires = battery.SpindlerBattery(lastServiced, currentDate)
+        wearArray = [0.1, 0.5, 0.8, 0.1]
+        NewTires = tires.CarriganTires(wearArray)
         self.assertFalse(NewTires.needs_service())
 
     def test_OctoprimeTires_needsService(self):
-        currentDate = datetime.today().date()
-        lastServiced = currentDate.replace(year= currentDate.year - 4)
-        NewTires = battery.NubbinBattery(lastServiced, currentDate)
+        wearArray = [0.9, 0.9, 0.9, 0.3]
+        NewTires = tires.OctoprimeTires(wearArray)
         self.assertTrue(NewTires.needs_service())
 
     def test_OctoprimeTires_DoesNotNeedService(self):
-        currentDate = datetime.today().date()
-        lastServiced = currentDate.replace(year= currentDate.year - 3)
-        NewTires = battery.NubbinBattery(lastServiced, currentDate)
+        wearArray = [0.1, 0.5, 0.9, 0.1]
+        NewTires = tires.OctoprimeTires(wearArray)
         self.assertFalse(NewTires.needs_service())
 
 if __name__ == '__main__':
